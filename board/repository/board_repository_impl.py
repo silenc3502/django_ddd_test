@@ -18,7 +18,7 @@ class BoardRepositoryImpl(BoardRepository):
         return cls.__instance
 
     def get_all_boards(self):
-        return Board.objects.all()
+        return Board.objects.all().order_by('-regDate')
 
     def get_board_by_id(self, board_id):
         return Board.objects.get(boardId=board_id)
