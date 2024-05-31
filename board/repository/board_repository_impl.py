@@ -1,4 +1,4 @@
-from board.models import Board
+from board.entity.models import Board
 from board.repository.board_repository import BoardRepository
 
 

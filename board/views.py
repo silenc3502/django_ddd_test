@@ -1,7 +1,7 @@
 from rest_framework import viewsets, status
 from rest_framework.response import Response
 from .serializers import BoardSerializer
-from .models import Board
+from board.entity.models import Board
 from .service.board_service_impl import BoardServiceImpl
 
 
