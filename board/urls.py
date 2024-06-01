@@ -1,7 +1,7 @@
 from django.urls import path, include
 from rest_framework.routers import DefaultRouter
 
-from .views import BoardViewSet
+from board.controller.views import BoardViewSet
 
 router = DefaultRouter()
 router.register(r'board', BoardViewSet)  # Using 'board' instead of 'boards'

@@ -1,8 +1,8 @@
 from rest_framework import viewsets, status
 from rest_framework.response import Response
-from .serializers import BoardSerializer
+from board.serializers import BoardSerializer
 from board.entity.models import Board
-from .service.board_service_impl import BoardServiceImpl
+from board.service.board_service_impl import BoardServiceImpl
 
 
 class BoardViewSet(viewsets.ViewSet):
