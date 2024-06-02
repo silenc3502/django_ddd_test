@@ -27,6 +27,17 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+# MEDIA_ROOT = BASE_DIR / 'media'
+# MEDIA_URL = '/media/'
+
+import os
+UPLOAD_DIR = os.path.abspath(os.path.join(BASE_DIR, '..', 'vuetify-board-with-django', 'src', 'assets', 'uploadImgs'))
+
+print('UPLOAD_DIR:', UPLOAD_DIR)
+
+# STATIC 파일 설정
+STATIC_URL = '/static/'
+
 
 # Application definition
 
