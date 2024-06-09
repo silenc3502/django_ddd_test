@@ -30,9 +30,11 @@ class KakaoServiceImpl(KakaoService):
         return cls.__instance
 
     def kakao_login_address(self):
+        print(f"kakao_login_address()")
         return f"{self.login_url}/oauth/authorize?client_id={self.client_id}&redirect_uri={self.redirect_uri}&response_type=code"
 
     def get_access_token(self, code):
+        print(f"get_access_token() -> code: {code}")
         data = {
             'grant_type': 'authorization_code',
             'client_id': self.client_id,
@@ -44,11 +46,13 @@ class KakaoServiceImpl(KakaoService):
         return response.json()
 
     def get_user_info(self, access_token):
+        print(f"get_user_info() -> access_token: {access_token}")
         headers = {'Authorization': f'Bearer {access_token}'}
-        response = requests.get(self.userinfo_request_url, headers=headers)
+        response = requests.post(self.userinfo_request_url, headers=headers)
         return response.json()
 
     def check_duplicate_account(self, code):
+        print(f"check_duplicate_account() -> code: {code}")
         token_data = self.get_access_token(code)
         user_info = self.get_user_info(token_data['access_token'])
         email = user_info['kakao_account']['email']
@@ -59,6 +63,9 @@ class KakaoServiceImpl(KakaoService):
         return 'NEW'
 
     def save_user_info(self, user_info, nickname, profile_image_name):
+        print(f"save_user_info() -> user_info: {user_info}, "
+              f"nickname: {nickname}, "
+              f"profile_image_name: {profile_image_name}")
         login_type = AccountLoginType.objects.get(login_type='KAKAO')
         role_type = AccountRoleType.objects.get(role_type='NORMAL')
         account = Account.objects.create(login_type=login_type, role_type=role_type)
@@ -66,6 +73,7 @@ class KakaoServiceImpl(KakaoService):
         return account
 
     def get_new_account(self, request_data):
+        print(f"get_new_account() -> code: {request_data}")
         token_data = self.get_access_token(request_data['code'])
         user_info = self.get_user_info(token_data['access_token'])
         account = self.save_user_info(user_info, request_data['nickname'], request_data['profile_image_name'])
@@ -81,6 +89,7 @@ class KakaoServiceImpl(KakaoService):
         }
 
     def get_account(self, access_token):
+        print(f"get_account() -> access_token: {access_token}")
         user_info = self.get_user_info(access_token)
         email = user_info['kakao_account']['email']
         login_type = AccountLoginType.objects.get(login_type='KAKAO')
