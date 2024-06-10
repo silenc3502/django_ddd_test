@@ -6,8 +6,6 @@ from .account_role_type import AccountRoleType
 
 class Account(models.Model):
     id = models.AutoField(primary_key=True)
-    create_date = models.DateTimeField(auto_now_add=True)
-    last_login_date = models.DateTimeField(default=timezone.now)
     login_type = models.OneToOneField(AccountLoginType, on_delete=models.CASCADE)
     role_type = models.OneToOneField(AccountRoleType, on_delete=models.CASCADE)
 
@@ -15,4 +13,5 @@ class Account(models.Model):
         return f"Account {self.id}"
 
     class Meta:
+        db_table = 'account'
         app_label = 'account'

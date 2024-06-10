@@ -41,9 +41,10 @@ class OauthView(ViewSet):
         print(f"get_kakao_user_info()")
         print(f"Request data: {request.data}")
 
-        access_token_data = request.data.get('access_token')
-        if isinstance(access_token_data, dict) and 'accessToken' in access_token_data:
-            access_token = access_token_data['accessToken']
+        access_token = request.data.get('access_token')
+        if isinstance(access_token, str):
+            # access_token이 문자열인 경우 처리합니다.
+            print(f'access_token: {access_token}')
         else:
             return JsonResponse({'error': 'Invalid access token format'}, status=400)
 

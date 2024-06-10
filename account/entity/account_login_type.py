@@ -10,4 +10,5 @@ class AccountLoginType(models.Model):
         return self.login_type
 
     class Meta:
+        db_table = 'account_login_type'
         app_label = 'account'

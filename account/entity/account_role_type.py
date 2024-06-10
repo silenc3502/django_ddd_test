@@ -8,4 +8,5 @@ class AccountRoleType(models.Model):
         return self.role_type
 
     class Meta:
+        db_table = 'account_role_type'
         app_label = 'account'
