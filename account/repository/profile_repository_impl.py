@@ -26,3 +26,9 @@ class ProfileRepositoryImpl(ProfileRepository):
             return Profile.objects.get(nickname=nickname)
         except Profile.DoesNotExist:
             return False
+
+    def findByEmail(self, email):
+        try:
+            return Profile.objects.get(email=email)
+        except Profile.DoesNotExist:
+            return False

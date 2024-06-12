@@ -41,3 +41,17 @@ class AccountViewSet(viewsets.ViewSet):
         except Exception as e:
             print('Error occurred during nickname duplication check:', e)
             return Response({'error': str(e)}, status=status.HTTP_400_BAD_REQUEST)
+
+    def checkEmailDuplication(self, request):
+        try:
+            email = request.data.get('email')
+            is_duplicate = self.account_service.check_email_duplication(email)
+
+            if is_duplicate:
+                return Response({'message': 'Email is already in use'}, status=status.HTTP_400_BAD_REQUEST)
+            else:
+                return Response({'message': 'Email is available'}, status=status.HTTP_200_OK)
+
+        except Exception as e:
+            print('Error occurred during email duplication check:', e)
+            return Response({'error': str(e)}, status=status.HTTP_400_BAD_REQUEST)

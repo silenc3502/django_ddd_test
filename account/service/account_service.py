@@ -9,3 +9,7 @@ class AccountService(ABC):
     @abstractmethod
     def check_nickname_duplication(self, nickname):
         pass
+
+    @abstractmethod
+    def check_email_duplication(self, email):
+        pass

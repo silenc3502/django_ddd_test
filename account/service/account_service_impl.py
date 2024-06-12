@@ -35,3 +35,11 @@ class AccountServiceImpl(AccountService):
             print('Error occurred during nickname duplication check:', e)
             return True
 
+    def check_email_duplication(self, email):
+        profile = self.__profileRepository.findByEmail(email)
+        if profile:
+            return True
+        else:
+            return False
+
+
