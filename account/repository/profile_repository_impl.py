@@ -28,7 +28,14 @@ class ProfileRepositoryImpl(ProfileRepository):
             return False
 
     def findByEmail(self, email):
+        print(f"findByEmail called: {email}")
         try:
-            return Profile.objects.get(email=email)
+            profile = Profile.objects.get(email=email)
+            print(f"Profile found: {profile}")
+            return profile
         except Profile.DoesNotExist:
-            return False
+            print(f"No profile found with email: {email}")
+            return None
+        except Exception as e:
+            print(f"An error occurred while fetching profile by email: {e}")
+            return None

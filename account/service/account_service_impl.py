@@ -36,10 +36,8 @@ class AccountServiceImpl(AccountService):
             return True
 
     def check_email_duplication(self, email):
+        print(f"check_email_duplication: {email}")
         profile = self.__profileRepository.findByEmail(email)
-        if profile:
-            return True
-        else:
-            return False
+        return profile is not None
 
 
